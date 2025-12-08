@@ -1,16 +1,15 @@
-package middlewares
+package http
 
 import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"github.com/EugeneNail/motivatr-lib-common/pkg/usecases"
 	"net/http"
 )
 
-func WriteJsonResponse(useCaseHandler usecases.UseCaseHandler) http.HandlerFunc {
+func WriteJsonResponse(httpHandler Handler) http.HandlerFunc {
 	return func(writer http.ResponseWriter, request *http.Request) {
-		status, data := useCaseHandler.Handle(request)
+		status, data := httpHandler.Handle(request)
 		if err, isError := data.(error); isError {
 			fmt.Printf(err.Error())
 			http.Error(writer, err.Error(), status)

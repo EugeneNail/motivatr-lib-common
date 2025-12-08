@@ -1,7 +1,7 @@
-package usecases
+package http
 
 import "net/http"
 
-type UseCaseHandler interface {
+type Handler interface {
 	Handle(request *http.Request) (status int, data any)
 }
