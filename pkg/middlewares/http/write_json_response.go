@@ -7,9 +7,9 @@ import (
 	"net/http"
 )
 
-func WriteJsonResponse(handlerFunc HandlerFunc) http.HandlerFunc {
+func WriteJsonResponse(webHandlerFunc WebHandlerFunc) http.HandlerFunc {
 	return func(writer http.ResponseWriter, request *http.Request) {
-		status, data := handlerFunc(request)
+		status, data := webHandlerFunc(request)
 		if err, isError := data.(error); isError {
 			fmt.Printf(err.Error())
 			http.Error(writer, err.Error(), status)
